@@ -37,13 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
         // Set animation parameters
         anim.SetBool("run", horizontalInput != 0); // Use run animation when player is moving horizontally
-        anim.SetBool("isGrounded", isGrounded()); // Returns true when player is touching a "Ground" tag
+        anim.SetBool("isGrounded", IsGrounded()); // Returns true when player is touching a "Ground" tag
 
         if (wallJumpCooldown > 0.2f)
         {
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-            if (onWall() && !isGrounded())
+            if (OnWall() && !IsGrounded())
             {
                 // Player doesn't fall off wall
                 body.gravityScale = 0;
@@ -67,12 +67,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (isGrounded()) // Normal jump
+        if (IsGrounded()) // Normal jump
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             anim.SetTrigger("jump");
         }
-        else if (onWall() && !isGrounded()) // Wall jump
+        else if (OnWall() && !IsGrounded()) // Wall jump
         {
             if (horizontalInput == 0) // For getting off the wall, face the player in the direction of movement
             {
@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
         // Create an invisible box under the player to detect the ground
         // The parameters are for size and direction of the box
@@ -97,14 +97,14 @@ public class PlayerMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    private bool onWall()
+    private bool OnWall()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
     }
 
-    public bool canAttack()
+    public bool CanAttack()
     {
-        return horizontalInput == 0 && isGrounded() && !onWall();
+        return horizontalInput == 0 && IsGrounded() && !OnWall();
     }
 }

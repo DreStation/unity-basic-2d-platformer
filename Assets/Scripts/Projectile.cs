@@ -18,14 +18,21 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (hit) return;
+        // If fireball hits something, skip the lifetime code below
+        if (hit)
+        {
+            return;
+        }
 
         float movementSpeed = speed * Time.deltaTime * direction;
         transform.Translate(movementSpeed, 0, 0);
 
         // Deactivate object if fireball flies for too long
         lifetime += Time.deltaTime;
-        if (lifetime > 5) Deactivate();
+        if (lifetime > 5)
+        {
+            Deactivate();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,9 +54,7 @@ public class Projectile : MonoBehaviour
 
         // Check if the fireball is NOT facing the same way as direction
         if (Mathf.Sign(localScaleX) != _direction)
-        {
             localScaleX = -localScaleX; // Flip it
-        }
 
         transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
