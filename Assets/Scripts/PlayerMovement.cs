@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     private float wallJumpCooldown;
     private float horizontalInput;
-
     private Animator anim;
     private Rigidbody2D body;
     private BoxCollider2D boxCollider;

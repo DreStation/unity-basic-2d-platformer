@@ -6,7 +6,6 @@ public class Projectile : MonoBehaviour
     private float direction;
     private float lifetime;
     private bool hit;
-
     private BoxCollider2D boxCollider;
     private Animator anim;
 
@@ -54,7 +53,9 @@ public class Projectile : MonoBehaviour
 
         // Check if the fireball is NOT facing the same way as direction
         if (Mathf.Sign(localScaleX) != _direction)
+        {
             localScaleX = -localScaleX; // Flip it
+        }
 
         transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
