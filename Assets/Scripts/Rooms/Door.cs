@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    /*
     [SerializeField] private Transform previousRoom;
     [SerializeField] private Transform nextRoom;
     [SerializeField] private CameraController cam;
@@ -21,5 +22,5 @@ public class Door : MonoBehaviour
                 cam.MoveToNewRoom(previousRoom);
             }
         }
-    }
+    }*/
 }
